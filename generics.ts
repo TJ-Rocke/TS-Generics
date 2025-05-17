@@ -26,8 +26,20 @@ store.isCoder = true;
 // ids[0]
 
 // way around this problem
-function merge<T>(a: T, b: T) {
+// function merge<T>(a: T, b: T) {
+//   return [a, b];
+// }
+// const ids = merge<number | string>("string", 1);
+// ids[0];
+
+// console.log(ids);
+
+// working with multiple Generic Parameters
+function merge<T, U>(a: T, b: U) {
   return [a, b];
 }
-const ids = merge<number | string>(1, "string");
+const ids = merge<number | string, number | string>("1", "string");
+// const ids = merge("1", "string"); // ts can also infer the types without the types in th '<>' brackets
 ids[0];
+
+console.log(ids);
