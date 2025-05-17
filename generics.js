@@ -23,5 +23,20 @@ function merge(a, b) {
     return [a, b];
 }
 const ids = merge("1", "string");
+// const ids = merge("1", "string"); // ts can also infer the types without the types in th '<>' brackets
 ids[0];
 console.log(ids);
+// Generics and constraints
+// this will console log an empty object because numbers cant be spread into an object
+// function mergeObj(a: any, b: any) {
+//   return { ...a, ...b };
+// }
+// const merged = mergeObj(1, 2);
+// console.log(merged);
+// correct way to do solve this problem
+function mergeObj(a, b) {
+    // adds constraint using 'extends' keyword. essentially tells ts the actual type that is being used must extend another certain type of my choice. So 'T' must extend as on object.
+    return { ...a, ...b };
+}
+const merged = mergeObj({ userId: 1 }, { userName: "SpOOkWinz" });
+console.log(merged);

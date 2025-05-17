@@ -43,3 +43,41 @@ const ids = merge<number | string, number | string>("1", "string");
 ids[0];
 
 console.log(ids);
+
+// Generics and constraints
+// this will console log an empty object because numbers cant be spread into an object
+// function mergeObj(a: any, b: any) {
+//   return { ...a, ...b };
+// }
+
+// const merged = mergeObj(1, 2);
+// console.log(merged);
+
+// correct way to do solve this problem
+// function mergeObj<T extends object>(a: T, b: T) {
+//   // adds constraint using 'extends' keyword. essentially tells ts the actual type that is being used must extend another certain type of my choice. So 'T' must extend as on object.
+//   return { ...a, ...b };
+// }
+
+// const merged = mergeObj({ userId: 1 }, { userName: "SpOOkWinz" });
+// console.log(merged); // logs this to the console=> { userId: 1, userName: 'SpOOkWinz' }
+
+// the above creates a complex inferred type, instead you could do below
+function mergeObj<T extends object, U extends object>(a: T, b: U) {
+  // adds constraint using 'extends' keyword. essentially tells ts the actual type that is being used must extend another certain type of my choice. So 'T' must extend as on object.
+  return { ...a, ...b };
+}
+
+const merged = mergeObj({ userId: 1 }, { userName: "SpOOkWinz" });
+console.log(merged);
+
+// Generic Classes and interfaces
+// class
+class User<T> {
+  constructor(public id: T) {}
+}
+const user = new User("id1");
+console.log(user.id);
+
+// interface
+interface Role<T> {}
